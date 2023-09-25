@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        body {
+            font-family: consolas;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="display"></div>
+    <form action="" method="post" id="form">
+        <input type="text" name="name">
+        <input type="submit" value="submit">
+    </form>
+
+    <script>
+      const display = document.querySelector("#display")
+      const form = document.querySelector("#form")
+
+      const calculateSum = (...nums) => nums.reduce((acc, num) => acc + num, 0)
+      const sumResult = (...nums) => `Sum of ${nums}: ${calculateSum(...nums)}`
+
+      const calculateSquare = (...nums) => nums.map(num => num ** 2)
+      const squareResult = (...nums) => `Square of ${nums}: ${calculateSquare(...nums)}`
+
+      const findEvenNumbers = (...nums) => nums.filter(num => num % 2 === 0)
+      const evenResult = (...nums) => `Even numbers in ${nums}: ${findEvenNumbers(...nums)}`
+
+      const sortDescending = (...nums) => nums.sort((start, end) => end - start)
+      const descendResult = (...nums) => `Descending order of ${nums}: ${sortDescending(...nums)}`
+
+      const sliceArray = ([start, end], ...nums) => nums.slice(start, end)
+      const slicedResult = ([start, end], ...nums) => `Slice Array: ${nums} from index ${start} to index ${end}: ${sliceArray([start, end], ...nums)}`
+
+      const currentUrl = new URL(window.location.href)
+
+      const fullName = 'First Middle Last'
+      const splitName = (str) => str.split(' ')
+
+      const commaSeparatedNames = 'First, Middle, Last'
+      const removeCommas = (str) => str.replaceAll(',', '')
+
+      const fetchData = async (success) => {
+        if (!success) throw new Error('Unable to fetch data')
+        return 'Data fetched successfully'
+      }
+
+      const fetchDataSuccess = async () => {
+        try {
+            const data = await fetchData(true)
+            display.innerHTML += `<br>Fetch data success: ${data}`;
+        } catch (error) {
+            display.innerHTML += `<br>Fetch data error: ${error.message}`;
+        }
+      }
+
+      const fetchDataError = async () => {
+        try {
+            const data = await fetchData(false)
+            display.innerHTML += `<br>Fetch data success: ${data}`;
+        } catch (error) {
+            display.innerHTML += `<br>Fetch data error: ${error.message}`;
+        }
+      }
+
+      const allResults = [
+        sumResult(10, 20, 30, 40),
+        squareResult(1, 2, 3, 4),
+        evenResult(1, 2, 3, 4),
+        descendResult(2, 1, 4, 3),
+        `Current URL: ${currentUrl}`,
+        `Remove Commas from Name: ${removeCommas(commaSeparatedNames)}`,
+      ]
+
+      display.innerHTML = allResults.join('<br><br>')
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        const formData = new FormData(e.target)
+        display.innerHTML += `<br>Submitted Name: ${formData.get('name')}`;
+      })
+      
+      fetchDataSuccess()
+      fetchDataError()
+
+      splitName(fullName).forEach((name, i) => {
+        display.innerHTML += `<br>Get Array from name ${++i}: ${name}`;
+      });
+
+      class Person {
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+
+        sayHello() {
+          return `Hello, my name is ${this.name} and I am ${this.age} years old.`;
+        }
+      }
+
+      const person = new Person("John", 30);
+      display.innerHTML += `<br><br>Class Example: ${person.sayHello()}`;
+    </script>
+  </body>
+</html>
