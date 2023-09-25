@@ -34,7 +34,7 @@
       const descendResult = (...nums) => `Descending order of ${nums}: ${sortDescending(...nums)}`
 
       const sliceArray = ([start, end], ...nums) => nums.slice(start, end)
-      const slicedResult = ([start, end], ...nums) => `Slice Array: ${nums} from index ${start} to index ${end}: ${sliceArray([start, end], ...nums)}`
+      const slicedResult = ([start, end], ...nums) => `Slice Array of ${nums} from index ${start} to index ${end}: ${sliceArray([start, end], ...nums)}`
 
       const currentUrl = new URL(window.location.href)
 
@@ -74,7 +74,7 @@
         descendResult(2, 1, 4, 3),
         slicedResult([0, 2], 1, 2, 3, 4),
         `Current URL: ${currentUrl}`,
-        `Remove Commas from Name: ${removeCommas(commaSeparatedNames)}`,
+        `Remove Commas from Name: ${removeCommas(commaSeparatedNames)}<br>`,
       ]
 
       display.innerHTML = allResults.join('<br><br>')
@@ -104,7 +104,7 @@
       }
 
       const person = new Person("John", 30);
-      display.innerHTML += `<br><br>Class Example: ${person.sayHello()}`;
+      display.innerHTML += `<br><br>Class Example: ${person.sayHello()}<br>`;
     </script>
   </body>
 </html>
